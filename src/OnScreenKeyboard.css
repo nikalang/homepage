@@ -1,0 +1,31 @@
+.OnScreenKeyboard {
+	height: 100%;
+	width: 600px;
+}
+
+.OnScreenKeyboard td {
+	height: 40px;
+	width: 40px;
+	margin: 10px;
+	padding: 10px;
+	border-width: 5px;
+	border-radius: 10px;
+	background-color: hsl(260deg, 100%, 80%);
+	color: hsl(300deg, 100%, 95%);
+	font-size: 24px;
+	font-weight: bolder;
+	text-align: center;
+	vertical-align: middle;
+}
+
+td.empty {
+	background-color: hsl(260deg, 100%, 85%);
+}
+
+td.punctuation, table.punctuation td {
+	background-color: hsl(240deg, 100%, 85%);
+}
+
+td.symbols, table.punctuation td.symbols {
+	background-color: hsl(280deg, 100%, 85%);
+}

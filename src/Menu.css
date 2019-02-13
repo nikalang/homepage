@@ -1,0 +1,7 @@
+.Menu {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	width: 40px;
+	background-color: hsl(260deg, 100%, 85%);
+}
