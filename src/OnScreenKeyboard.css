@@ -18,7 +18,7 @@
 	vertical-align: middle;
 }
 
-td.empty {
+td.control {
 	background-color: hsl(260deg, 100%, 85%);
 }
 
@@ -26,6 +26,19 @@ td.punctuation, table.punctuation td {
 	background-color: hsl(240deg, 100%, 85%);
 }
 
-td.symbols, table.punctuation td.symbols {
+td.switch, table.punctuation td.switch {
 	background-color: hsl(280deg, 100%, 85%);
+}
+
+.text-input {
+	width: 36px;
+	border: 1px solid;
+	border-radius: 10px;
+	padding: 6px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: hsl(260deg, 100%, 95%);
+	color: hsl(260deg, 100%, 80%);
+	font-weight: normal;
+	font-size: 24px;
 }
