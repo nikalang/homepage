@@ -236,7 +236,7 @@ export default class OnScreenKeyboard extends Component {
   render() {
     return (
       <div className="OnScreenKeyboard">
-        <input className="text-input" type="text" value={this.state.value} onKeyPress={e => {
+        <textarea className="text-input" type="text" value={this.state.value} onKeyPress={e => {
           const oldValue = this.state.value;
           const code = e.which || e.keyCode;
           const c = String.fromCharCode(code);
@@ -266,10 +266,23 @@ export default class OnScreenKeyboard extends Component {
                       } else if (cell.value) {
                         onClick = (e) => {
                           const oldValue = this.state.value;
-                          this.setState({
-                            ...this.state,
-                            value: this.calculate(oldValue, e.target.innerText)
-                          });
+                          if (e.target.innerText === '⌫') {
+                            this.setState({
+                              ...this.state,
+                              value: oldValue.substring(0, oldValue.length - 1),
+                            });
+                          } else if (e.target.innerText === '⏎') {
+                            this.setState({
+                              ...this.state,
+                              value: `${oldValue}\n`,
+                            });
+
+                          } else {
+                            this.setState({
+                              ...this.state,
+                              value: this.calculate(oldValue, e.target.innerText)
+                            });
+                          }
                         };
                       }
                       return (
@@ -319,8 +332,8 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/,/gi, '、');
     value = value.replace(/\./gi, '。');
     value = value.replace(/\//gi, '／');
-    value = value.replace(/\</gi, '；');
-    value = value.replace(/\>/gi, '：');
+    value = value.replace(/</gi, '；');
+    value = value.replace(/>/gi, '：');
     value = value.replace(/\?/gi, '？');
     value = value.replace(/;/gi, '﹁');
     value = value.replace(/'/gi, '﹂');
@@ -330,8 +343,8 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/\]/gi, '】');
     value = value.replace(/\{/gi, '〔');
     value = value.replace(/\}/gi, '〕');
-    value = value.replace(/.?\\/gi, ''); // Workaround for backspace
-    value = value.replace(/\|/gi, "\u200B"); // Workaround for zero-width space
+    value = value.replace(/\\/gi, '');
+    value = value.replace(/\|/gi, '');
     value = value.replace(/-/gi, '—');    
     value = value.replace(/=/gi, '〜');    
     value = value.replace(/_/gi, '＿');    
@@ -344,8 +357,6 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/[@#$%^&]/gi, '');
     value = value.replace(/~/gi, '⋯');    
     value = value.replace(/`/gi, '・');
-    value = value.replace(/.*⏎/gi, '');
-    value = value.replace(/.?⌫/gi, '');
     value = value.replace(/ㄱㄱ/gi, 'ㄲ');
     value = value.replace(/ㄲㅏ/gi, '까');
     value = value.replace(/ㄲㅓ/gi, '꺼');

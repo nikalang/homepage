@@ -1,6 +1,7 @@
 .OnScreenKeyboard {
 	height: 100%;
 	width: 600px;
+	margin: 30px;
 }
 
 .OnScreenKeyboard td {
@@ -35,7 +36,7 @@ td.inactive {
 }
 
 .text-input {
-	width: 36px;
+	width: 240px;
 	border: 1px solid;
 	border-radius: 10px;
 	padding: 6px;
@@ -45,4 +46,5 @@ td.inactive {
 	color: hsl(260deg, 100%, 80%);
 	font-weight: normal;
 	font-size: 24px;
+	margin-left: 30px;
 }
