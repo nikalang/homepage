@@ -18,16 +18,20 @@
 	vertical-align: middle;
 }
 
+td.punctuation {
+	background-color: hsl(240deg, 100%, 85%);
+}
+
 td.control {
 	background-color: hsl(260deg, 100%, 85%);
 }
 
-td.punctuation, table.punctuation td {
-	background-color: hsl(240deg, 100%, 85%);
+td.link {
+	background-color: hsl(280deg, 100%, 85%);
 }
 
-td.switch, table.punctuation td.switch {
-	background-color: hsl(280deg, 100%, 85%);
+td.inactive {
+	background-color: hsl(260deg, 0%, 85%);
 }
 
 .text-input {

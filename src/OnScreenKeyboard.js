@@ -6,7 +6,7 @@ export default class OnScreenKeyboard extends Component {
   constructor(props) {
   	super(props);
   	this.state = {
-      letters: true,
+      layer: 'letters',
       value: '',
   	};
   }
@@ -17,91 +17,107 @@ export default class OnScreenKeyboard extends Component {
         [
           {
             value: 'ㄱ',
+            valueClass: ['letter', 'consonant', 'initial'],
+
           },
           {
             value: 'ㄴ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㄷ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㄹ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㅁ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
         ],
         [
           {
             value: 'ㅂ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㅅ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㅇ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㅈ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
           {
             value: 'ㅎ',
+            valueClass: ['letter', 'consonant', 'initial'],
           },
         ],
         [
           {
             value: 'ㅏ',
+            valueClass: ['letter', 'vowel', 'final'],
           },
           {
             value: 'ㅓ',
+            valueClass: ['letter', 'vowel', 'final'],
           },
           {
             value: 'ㅗ',
+            valueClass: ['letter', 'vowel', 'final'],
           },
           {
             value: 'ㅜ',
+            valueClass: ['letter', 'vowel', 'final'],
           },
           {
             value: 'ㅣ',
+            valueClass: ['letter', 'vowel', 'final'],
           },
         ],
         [
           {
             value: '　',
-            valueClass: 'punctuation',
+            valueClass: ['punctuation'],
           },
           {
             value: '、',
-            valueClass: 'punctuation',
+            valueClass: ['punctuation'],
           },
           {
             value: '。',
-            valueClass: 'punctuation',
+            valueClass: ['punctuation'],
           },
           {
             value: '？',
-            valueClass: 'punctuation',
+            valueClass: ['punctuation'],
           },
           {
             value: '！',
-            valueClass: 'punctuation',
+            valueClass: ['punctuation'],
           },
         ],
         [
           {
-            value: '⌧',
-            valueClass: 'control',
+            value: '⌫',
+            valueClass: ['control'],
             colspan: 2,
           },
           {
             value: '⏎',
-            valueClass: 'control',
+            valueClass: ['control'],
             colspan: 2,
           },
           {
-            value: '…',
-            valueClass: 'switch',
-            switch : true,
+            value: '⋯',
+            valueClass: ['link'],
+            link: 'symbols',
           },
         ],
       ],
@@ -109,88 +125,108 @@ export default class OnScreenKeyboard extends Component {
         [
           {
             value: '（',
+            valueClass: ['punctuation'],
           },
           {
             value: '）',
+            valueClass: ['punctuation'],
           },
-          {
-            value: '；',
-          },
-          {
-            value: '：',
-          },
-          {
-            value: '・',
-          },          
-        ],
-        [
           {
             value: '【',
+            valueClass: ['punctuation'],
           },
           {
             value: '】',
+            valueClass: ['punctuation'],
           },
           {
-            value: '—',
-          },          
-          {
-            value: '〜',
-          },
-          {
-            value: '＿',
-          },
-        ],
-        [
-          {
-            value: '〔',
-          },
-          {
-            value: '〕',
-          },
-          {
-            value: '／',
-          },
-          {
-            value: '　',
-          },
-          {
-            value: '　',
+            value: '・',
+            valueClass: ['punctuation'],
           },          
         ],
         [
           {
             value: '﹁',
+            valueClass: ['punctuation'],
           },
           {
             value: '﹂',
+            valueClass: ['punctuation'],
           },
           {
-            value: '　',
-          },
-          {
-            value: '　',
-          },
-          {
-            value: '　',
+            value: '〔',
+            valueClass: ['punctuation'],
           },          
+          {
+            value: '〕',
+            valueClass: ['punctuation'],
+          },
+          {
+            value: '⋯',
+            valueClass: ['punctuation'],
+          },
         ],
         [
           {
             value: '﹃',
+            valueClass: ['punctuation'],
           },
           {
             value: '﹄',
+            valueClass: ['punctuation'],
           },
           {
-            value: '　',
+            value: '／',
+            valueClass: ['punctuation'],
           },
           {
-            value: '　',
+            value: '—',
+            valueClass: ['punctuation'],
           },
           {
-            value: 'ㄱ',
-            valueClass: 'switch',
-            switch : true,
+            value: '＿',
+            valueClass: ['punctuation'],
+          },          
+        ],
+        [
+          {
+            value: '＊',
+            valueClass: ['punctuation'],
+          },
+          {
+            value: '；',
+            valueClass: ['punctuation'],
+          },
+          {
+            value: '：',
+            valueClass: ['punctuation'],
+          },
+          {
+            value: '〜',
+            valueClass: ['punctuation'],
+          },
+          {
+            value: '﹏',
+            valueClass: ['punctuation'],
+          },          
+        ],
+        [
+          {
+            valueClass: ['inactive'],
+          },
+          {
+            valueClass: ['inactive'],
+          },
+          {
+            valueClass: ['inactive'],
+          },
+          {
+            valueClass: ['inactive'],
+          },
+          {
+            value: '가',
+            valueClass: ['link'],
+            link : 'letters',
           },          
         ],
       ],
@@ -198,102 +234,62 @@ export default class OnScreenKeyboard extends Component {
   };
 
   render() {
-    if (this.state.letters) {
-      return (
-        <div className="OnScreenKeyboard">
-          <input className="text-input" type="text" value={this.state.value} onKeyPress={e => {
-            const oldValue = this.state.value;
-            const code = e.which || e.keyCode;
-            const c = String.fromCharCode(code);
-            this.setState({...this.state, value: this.calculate(oldValue, c)});
-          }}/>
-          <table>
-            {
-              this.getKeys().letters.map((row => {
-                return (
-                  <tr>
-                    {
-                      row.map(cell => {
-                        const classNames = cell.valueClass || null;
-                        const colspan = cell.colspan || null;
-                        const onClick = cell.switch ? (e) => {
+    return (
+      <div className="OnScreenKeyboard">
+        <input className="text-input" type="text" value={this.state.value} onKeyPress={e => {
+          const oldValue = this.state.value;
+          const code = e.which || e.keyCode;
+          const c = String.fromCharCode(code);
+          this.setState({...this.state, value: this.calculate(oldValue, c)});
+        }}/>
+        <table>
+          {
+            this.getKeys()[this.state.layer].map((row => {
+              return (
+                <tr>
+                  {
+                    row.map(cell => {
+                      const classNames = cell.valueClass ?
+                          cell.valueClass.reduce((previousValue, currentValue) => 
+                              `${previousValue} ${currentValue}`) :
+                          null;
+                      const colspan = cell.colspan || null;
+                      let onClick = null;
+                      if (cell.link) {
+                        onClick = (e) => {
                           this.setState(
                             {
-                              letters: false,
+                              layer: cell.link,
                             }
                           )
-                        } : (e) => {
+                        };
+                      } else if (cell.value) {
+                        onClick = (e) => {
                           const oldValue = this.state.value;
                           this.setState({
                             ...this.state,
                             value: this.calculate(oldValue, e.target.innerText)
                           });
                         };
-                        return (
-                          <td
-                            className={classNames}
-                            colSpan={colspan}
-                            onClick={onClick}
-                          >
-                            {cell.value}
-                          </td>
-                        );
-                      })
-                    }
-                  </tr>
-                )
-              }))
-            }
-          </table>
-        </div>
-      );
-    } else {
-      return (
-        <div className="OnScreenKeyboard">
-          <input className="text-input" type="text" value={this.state.value} onKeyPress={e => {
-            const oldValue = this.state.value;
-            const code = e.which || e.keyCode;
-            const c = String.fromCharCode(code);
-            this.setState({...this.state, value: this.calculate(oldValue, c)});
-          }}/>
-          <table className="punctuation">
-            {
-              this.getKeys().symbols.map((row => {
-                return (
-                  <tr>
-                    {
-                      row.map(cell => {
-                        const classNames = cell.valueClass || null;
-                        const colspan = cell.colspan || null;
-                        const onClick = cell.switch ? (e) => {
-                          this.setState(
-                            {
-                              letters: true,
-                            }
-                          )
-                        } : (e) => {
-                          const oldValue = this.state.value;
-                          this.setState({...this.state, value: `${oldValue}${e.target.innerText}`});
-                        };
-                        return (
-                          <td
-                            className={classNames}
-                            colSpan={colspan}
-                            onClick={onClick}
-                          >
-                            {cell.value}
-                          </td>
-                        );
-                      })
-                    }
-                  </tr>
-                )
-              }))
-            }
-          </table>
-        </div>
-      );
-    }
+                      }
+                      return (
+                        <td
+                          className={classNames}
+                          colSpan={colspan}
+                          onClick={onClick}
+                        >
+                          {cell.value}
+                        </td>
+                      );
+                    })
+                  }
+                </tr>
+              )
+            }))
+          }
+        </table>
+      </div>
+    );
   }
 
   calculate = (value, appended) => {
@@ -304,53 +300,57 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/u/gi, 'ㅜ');
     value = value.replace(/i/gi, 'ㅣ');
     value = value.replace(/g/gi, 'ㄱ');
-    value = value.replace(/k/gi, 'ㄱㄱ');
+    value = value.replace(/k/gi, 'ㄲ');
     value = value.replace(/n/gi, 'ㄴ');
     value = value.replace(/d/gi, 'ㄷ');
-    value = value.replace(/t/gi, 'ㄷㄷ');
+    value = value.replace(/t/gi, 'ㄸ');
     value = value.replace(/r/gi, 'ㄹ');
     value = value.replace(/m/gi, 'ㅁ');
     value = value.replace(/b/gi, 'ㅂ');
-    value = value.replace(/p/gi, 'ㅂㅂ');
+    value = value.replace(/p/gi, 'ㅃ');
     value = value.replace(/z/gi, 'ㅅ');
-    value = value.replace(/s/gi, 'ㅅㅅ');
+    value = value.replace(/s/gi, 'ㅆ');
     value = value.replace(/y/gi, 'ㅇ');
     value = value.replace(/j/gi, 'ㅈ');
-    value = value.replace(/c/gi, 'ㅈㅈ');
+    value = value.replace(/c/gi, 'ㅉ');
     value = value.replace(/w/gi, 'ㅎ');
     value = value.replace(/[fvlhqx]/gi, '');
     value = value.replace(/ /gi, '　');
     value = value.replace(/,/gi, '、');
     value = value.replace(/\./gi, '。');
+    value = value.replace(/\//gi, '／');
+    value = value.replace(/\</gi, '；');
+    value = value.replace(/\>/gi, '：');
     value = value.replace(/\?/gi, '？');
-    value = value.replace(/!/gi, '！');
-    value = value.replace(/\(/gi, '（');
-    value = value.replace(/\)/gi, '）');
+    value = value.replace(/;/gi, '﹁');
+    value = value.replace(/'/gi, '﹂');
+    value = value.replace(/:/gi, '﹃');
+    value = value.replace(/"/gi, '﹄');
     value = value.replace(/\[/gi, '【');
     value = value.replace(/\]/gi, '】');
     value = value.replace(/\{/gi, '〔');
     value = value.replace(/\}/gi, '〕');
-    value = value.replace(/.?\</gi, ''); // Workaround for Backspace
-    value = value.replace(/\>/gi, "\u200B"); // Workaround for Zero-width Space
-    value = value.replace(/[@#$%^&*+=]/gi, '');
-    value = value.replace(/[0-9]/gi, '');
-    value = value.replace(/'/gi, '﹁');
-    value = value.replace(/\\/gi, '﹂');
-    value = value.replace(/"/gi, '﹃');
-    value = value.replace(/\|/gi, '﹄');
-    value = value.replace(/;/gi, '；');
-    value = value.replace(/:/gi, '：');
-    value = value.replace(/\//gi, '／');
+    value = value.replace(/.?\\/gi, ''); // Workaround for backspace
+    value = value.replace(/\|/gi, "\u200B"); // Workaround for zero-width space
     value = value.replace(/-/gi, '—');    
+    value = value.replace(/=/gi, '〜');    
     value = value.replace(/_/gi, '＿');    
-    value = value.replace(/~/gi, '〜');    
+    value = value.replace(/\+/gi, '﹏');    
+    value = value.replace(/!/gi, '！');
+    value = value.replace(/\*/gi, '＊');
+    value = value.replace(/\(/gi, '（');
+    value = value.replace(/\)/gi, '）');
+    value = value.replace(/[0-9]/gi, '');
+    value = value.replace(/[@#$%^&]/gi, '');
+    value = value.replace(/~/gi, '⋯');    
     value = value.replace(/`/gi, '・');
     value = value.replace(/.*⏎/gi, '');
-    value = value.replace(/.?⌧/gi, '');
-    value = value.replace(/ㄱㄱㅏ/gi, '까');
-    value = value.replace(/ㄱㄱㅓ/gi, '꺼');
-    value = value.replace(/ㄱㄱㅗ/gi, '꼬');
-    value = value.replace(/ㄱㄱㅜ/gi, '꾸');
+    value = value.replace(/.?⌫/gi, '');
+    value = value.replace(/ㄱㄱ/gi, 'ㄲ');
+    value = value.replace(/ㄲㅏ/gi, '까');
+    value = value.replace(/ㄲㅓ/gi, '꺼');
+    value = value.replace(/ㄲㅗ/gi, '꼬');
+    value = value.replace(/ㄲㅜ/gi, '꾸');
     value = value.replace(/ㄱㅏ/gi, '가');
     value = value.replace(/ㄱㅓ/gi, '거');
     value = value.replace(/ㄱㅗ/gi, '고');
@@ -360,10 +360,11 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/ㄴㅗ/gi, '노');
     value = value.replace(/ㄴㅜ/gi, '누');
     value = value.replace(/ㄴㅣ/gi, '니');
-    value = value.replace(/ㄷㄷㅏ/gi, '따');
-    value = value.replace(/ㄷㄷㅓ/gi, '떠');
-    value = value.replace(/ㄷㄷㅗ/gi, '또');
-    value = value.replace(/ㄷㄷㅜ/gi, '뚜');
+    value = value.replace(/ㄷㄷ/gi, 'ㄸ');
+    value = value.replace(/ㄸㅏ/gi, '따');
+    value = value.replace(/ㄸㅓ/gi, '떠');
+    value = value.replace(/ㄸㅗ/gi, '또');
+    value = value.replace(/ㄸㅜ/gi, '뚜');
     value = value.replace(/ㄷㅏ/gi, '다');
     value = value.replace(/ㄷㅓ/gi, '더');
     value = value.replace(/ㄷㅗ/gi, '도');
@@ -377,21 +378,23 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/ㅁㅗ/gi, '모');
     value = value.replace(/ㅁㅜ/gi, '무');
     value = value.replace(/ㅁㅣ/gi, '미');
-    value = value.replace(/ㅂㅂㅏ/gi, '빠');
-    value = value.replace(/ㅂㅂㅓ/gi, '뻐');
-    value = value.replace(/ㅂㅂㅗ/gi, '뽀');
-    value = value.replace(/ㅂㅂㅜ/gi, '뿌');
-    value = value.replace(/ㅂㅂㅣ/gi, '삐');
+    value = value.replace(/ㅂㅂ/gi, 'ㅃ');
+    value = value.replace(/ㅃㅏ/gi, '빠');
+    value = value.replace(/ㅃㅓ/gi, '뻐');
+    value = value.replace(/ㅃㅗ/gi, '뽀');
+    value = value.replace(/ㅃㅜ/gi, '뿌');
+    value = value.replace(/ㅃㅣ/gi, '삐');
     value = value.replace(/ㅂㅏ/gi, '바');
     value = value.replace(/ㅂㅓ/gi, '버');
     value = value.replace(/ㅂㅗ/gi, '보');
     value = value.replace(/ㅂㅜ/gi, '부');
     value = value.replace(/ㅂㅣ/gi, '비');
-    value = value.replace(/ㅅㅅㅏ/gi, '싸');
-    value = value.replace(/ㅅㅅㅓ/gi, '써');
-    value = value.replace(/ㅅㅅㅗ/gi, '쏘');
-    value = value.replace(/ㅅㅅㅜ/gi, '쑤');
-    value = value.replace(/ㅅㅅㅣ/gi, '씨');
+    value = value.replace(/ㅅㅅ/gi, 'ㅆ');
+    value = value.replace(/ㅆㅏ/gi, '싸');
+    value = value.replace(/ㅆㅓ/gi, '써');
+    value = value.replace(/ㅆㅗ/gi, '쏘');
+    value = value.replace(/ㅆㅜ/gi, '쑤');
+    value = value.replace(/ㅆㅣ/gi, '씨');
     value = value.replace(/ㅅㅏ/gi, '사');
     value = value.replace(/ㅅㅓ/gi, '서');
     value = value.replace(/ㅅㅗ/gi, '소');
@@ -402,11 +405,12 @@ export default class OnScreenKeyboard extends Component {
     value = value.replace(/ㅇㅗ/gi, '오');
     value = value.replace(/ㅇㅜ/gi, '우');
     value = value.replace(/ㅇㅣ/gi, '이');
-    value = value.replace(/ㅈㅈㅏ/gi, '짜');
-    value = value.replace(/ㅈㅈㅓ/gi, '쩌');
-    value = value.replace(/ㅈㅈㅗ/gi, '쪼');
-    value = value.replace(/ㅈㅈㅜ/gi, '쭈');
-    value = value.replace(/ㅈㅈㅣ/gi, '찌');
+    value = value.replace(/ㅈㅈ/gi, 'ㅉ');
+    value = value.replace(/ㅉㅏ/gi, '짜');
+    value = value.replace(/ㅉㅓ/gi, '쩌');
+    value = value.replace(/ㅉㅗ/gi, '쪼');
+    value = value.replace(/ㅉㅜ/gi, '쭈');
+    value = value.replace(/ㅉㅣ/gi, '찌');
     value = value.replace(/ㅈㅏ/gi, '자');
     value = value.replace(/ㅈㅓ/gi, '저');
     value = value.replace(/ㅈㅗ/gi, '조');
