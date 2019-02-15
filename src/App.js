@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import Menu from './Menu';
 import Body from './Body';
 
 import './App.css';
 
-const App = () => 
-  <div className="App">
-    <Menu />
-    <Body />
-  </div>
+export default class App extends Component {
 
-export default App;
+  componentDidMount = () => {
+    document.title = '【까니】';
+  }
+  
+  render() {
+    return (
+      <div className="App">
+        <Menu />
+        <Body />
+      </div>
+      );
+  }
+}
